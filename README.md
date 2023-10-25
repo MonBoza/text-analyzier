@@ -97,3 +97,16 @@ const word = "hello";
 const text = "hello there";
 boldPassage(word, text);
 Expected Output: <p><strong>hello</strong> there</p>
+
+Test "It should organize the output of words from most used to least used return output."
+Code:
+const text = "Hi there hey yo hi hi yay yo whoa there whoa yay" 
+const word = " "
+ hiCounter (words, text)
+ Expected Output: Most common words:
+hi: 3
+there: 2
+hey: 1
+yo: 2
+yay: 2
+whoa: 2

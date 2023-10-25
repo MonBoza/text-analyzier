@@ -42,13 +42,9 @@ function wordCounter(text) {
     });
     return wordCount;
   }
-  function boldPassage(word, text) {
-    if (isEmpty(word) || isEmpty(text)) {
-        return null;
-    }
   
     function boldPassage(word, text) {
-        if ((text.trim().length === 0) || (word.trim().length === 0)) {
+        if  (isEmpty(word) || isEmpty(text)) {
           return null;
         }
         const p = document.createElement("p");
@@ -63,10 +59,11 @@ function wordCounter(text) {
           }
           if (index !== (textArray.length - 1)) {
             p.append(" ");
-          }
-        });
+          });
         return p;
       }
+
+      
   // UI Logic
 //function includesRarestLetter(word){
     //if (word.toLowerCae().includes("q")) {
@@ -74,19 +71,29 @@ function wordCounter(text) {
    // }
    // return false;
 //}
-// omit bad words :(
-// function omitBadWords(word, text) {
+ //omit bad words :(
+function omitBadWords(text) {
+  const offensiveWords = ["zoinks","zoinks", "muppeteer", "biffaroni", "loopdaloop"];
+  offensiveWords.forEach(word => {
+    let index = text.toLowerCase().indexOf(word.toLowerCase());
+    while(index !== -1){
+    text = text.slice(0, index)+
+    text.slice(index + word.length);
+    index = text.toLowerCase().indexOf(word.toLowerCase());
+    }
+  });
+  return text;
+}
 
- //   const textArray = text.split(" ");
-   // const filteredWords = textArray.filter(word => !word.includes(word));
-    //const result = filteredWords.join(" ");
-    //return result;
+function countWords(text) {
+  let wordsArray = text.split(" ");
+  let wordCount = {};
+  wordsArray.forEach(word =>{
+    wordCount[word]=(wordCount[word]|| 0)+1;
+  });
+  return wordCount;
+}
 
-//}
-
-//UI LOGIC
- 
-// UI Logic
 
 // UI Logic
 
@@ -105,7 +112,7 @@ function handleFormSubmission() {
     document.querySelector("div#bolded-passage").innerText = null;
   }
 }
-  }
+
   
   window.addEventListener("load", function() {
     document.querySelector("form#word-counter").addEventListener("submit", handleFormSubmission);
